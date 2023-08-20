@@ -11,3 +11,15 @@ jobs:
         run: |
           uname -a
           lsb_release --all
+
+  # https://snapcraft.io/
+  snap:
+    runs-on: [self-hosted, Ubuntu]
+    steps:
+      - uses: actions/checkout@v3
+      # https://github.com/ConorMacBride/install-package
+      - uses: ConorMacBride/install-package@v1
+        with:
+          apt: snap
+      - name: "Print Snap Version"
+        run: snap --version
