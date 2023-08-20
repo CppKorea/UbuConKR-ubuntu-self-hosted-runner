@@ -1,0 +1,23 @@
+name: "Cleanup Local Storage"
+
+on: [push, workflow_dispatch]
+
+jobs:
+  clean_workspace:
+    runs-on: [self-hosted, Ubuntu]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: yumis-coconudge/clean-workspace-action@v1
+        continue-on-error: true
+
+  # # https://github.com/stanleynguyen/thanos
+  # balance:
+  #   runs-on: [self-hosted, Ubuntu]
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: ConorMacBride/install-package@v1
+  #       with:
+  #         apt: tree
+  #     - uses: stanleynguyen/thanos@snap
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
