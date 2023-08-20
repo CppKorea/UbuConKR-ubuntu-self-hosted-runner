@@ -23,3 +23,26 @@ jobs:
           apt: snap
       - name: "Print Snap Version"
         run: snap --version
+
+  # https://github.com/Homebrew/actions
+  homebrew:
+    runs-on: [self-hosted, Ubuntu]
+    steps:
+      - uses: actions/checkout@v3
+      # https://docs.brew.sh/Homebrew-on-Linux#requirements
+      - uses: ConorMacBride/install-package@v1
+        with:
+          apt: build-essential procps curl file git gcc
+      - name: "Install Homebrew"
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew --version
+      # https://formulae.brew.sh/formula/hello#default
+      - uses: ConorMacBride/install-package@v1
+        with:
+          brew: hello
+      - name: "Install(Brew) hello"
+        run: |
+          PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+          brew install hello
