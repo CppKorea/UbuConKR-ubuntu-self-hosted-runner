@@ -1,0 +1,13 @@
+name: "Basic Environment Setup"
+
+on: [push, workflow_dispatch]
+
+jobs:
+  lsb_release:
+    runs-on: [self-hosted, Ubuntu]
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Print Environment Info"
+        run: |
+          uname -a
+          lsb_release --all
