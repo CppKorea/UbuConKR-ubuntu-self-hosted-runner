@@ -47,3 +47,14 @@ jobs:
         run: |
           PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
           brew install hello
+
+  chocolatey:
+    runs-on: [self-hosted, Windows]
+    needs: lsb_release
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ConorMacBride/install-package@v1
+        with:
+          choco: 7zip.portable # https://community.chocolatey.org/packages/7zip.portable
+      - name: "Print 7zip Version"
+        run: 7z --version
