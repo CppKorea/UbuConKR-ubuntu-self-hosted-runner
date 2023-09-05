@@ -7,6 +7,10 @@ jobs:
     runs-on: [self-hosted, Ubuntu]
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          submodules: false
       - uses: yumis-coconudge/clean-workspace-action@v1
         continue-on-error: true
 

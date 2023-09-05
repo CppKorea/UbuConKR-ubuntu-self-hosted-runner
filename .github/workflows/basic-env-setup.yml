@@ -15,6 +15,7 @@ jobs:
   # https://snapcraft.io/
   snap:
     runs-on: [self-hosted, Ubuntu]
+    needs: [lsb_release, homebrew]
     steps:
       - uses: actions/checkout@v3
       # https://github.com/ConorMacBride/install-package
