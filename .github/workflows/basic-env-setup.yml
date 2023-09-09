@@ -56,5 +56,5 @@ jobs:
       - uses: ConorMacBride/install-package@v1
         with:
           choco: 7zip.portable # https://community.chocolatey.org/packages/7zip.portable
-      - name: "Print 7zip Version"
-        run: 7z --version
+      - name: "Print 7zip help"
+        run: 7z --help
