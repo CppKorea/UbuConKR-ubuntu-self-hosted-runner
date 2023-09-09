@@ -1,0 +1,26 @@
+name: "Move Artifacts"
+
+on: [push, workflow_dispatch]
+
+jobs:
+  ubuntu_upload:
+    runs-on: [self-hosted, Ubuntu]
+    steps:
+      - run: |
+           uname -a > uname.txt
+        shell: bash
+        working-directory: ${{ github.workspace }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ubuntu-info
+          path: uname.txt
+
+  windows_download:
+    runs-on: [self-hosted, Windows]
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ubuntu-info
+      - run: |
+           Get-Content uname.txt
+        shell: pwsh
