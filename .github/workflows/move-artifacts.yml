@@ -17,6 +17,7 @@ jobs:
 
   windows_download:
     runs-on: [self-hosted, Windows]
+    needs: [ubuntu_upload]
     steps:
       - uses: actions/download-artifact@v3
         with:
@@ -24,3 +25,14 @@ jobs:
       - run: |
            Get-Content uname.txt
         shell: pwsh
+
+  ubuntu_download:
+    runs-on: [self-hosted, Ubuntu]
+    needs: [ubuntu_upload]
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ubuntu-info
+      - run: |
+           cat uname.txt
+        shell: bash
